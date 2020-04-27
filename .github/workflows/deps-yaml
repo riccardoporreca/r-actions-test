@@ -2,7 +2,7 @@ on:
   push:
   pull_request:
 
-name: R-CMD-check
+name: Install dependencies
 
 jobs:
   R-CMD-check:
@@ -18,17 +18,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: sysdeps
-        run: |
-          # sudo add-apt-repository ppa:cran/travis
-          # sudo apt-get -y update
-          # sudo apt-get install -y libgit2-dev libcurl4-openssl-dev
-          # sudo apt-get install -y make git-core libxml2-dev libgit2-dev libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc libcurl4-openssl-dev
-          # sudo apt-get install -y make git-core libxml2-dev libgit2-dev libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc 
-          
-        env: 
-          DEBIAN_FRONTEND: noninteractive
-
+        
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
@@ -54,6 +44,7 @@ jobs:
         run: |
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo add-apt-repository ppa:cran/libgit2
           echo $sysreqs
           sudo -s eval "$sysreqs"
 
