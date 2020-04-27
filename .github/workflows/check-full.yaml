@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: sysdeps
-        run: sudo apt-get -y update && sudo apt-get install -y git-core libcurl4-openssl-dev
+        run: sudo apt-get -y update && sudo apt-get install -y libxml2-dev libcurl4-openssl-dev
           # make git-core libxml2-dev libgit2-dev
           # libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc libcurl4-openssl-dev
         env: 
