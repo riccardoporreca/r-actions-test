@@ -20,11 +20,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: sysdeps
         run: |
-          sudo add-apt-repository ppa:cran/travis
-          sudo apt-get -y update
-          sudo apt-get install -y libgit2-dev libcurl4-openssl-dev
-          #sudo apt-get install -y make git-core libxml2-dev libgit2-dev libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc libcurl4-openssl-dev
-          sudo apt-get install -y make git-core libxml2-dev libgit2-dev libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc 
+          # sudo add-apt-repository ppa:cran/travis
+          # sudo apt-get -y update
+          # sudo apt-get install -y libgit2-dev libcurl4-openssl-dev
+          # sudo apt-get install -y make git-core libxml2-dev libgit2-dev libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc libcurl4-openssl-dev
+          # sudo apt-get install -y make git-core libxml2-dev libgit2-dev libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc 
           
         env: 
           DEBIAN_FRONTEND: noninteractive
@@ -42,7 +42,6 @@ jobs:
         shell: Rscript {0}
 
       - name: Cache R packages
-        if: runner.os != 'Windows'
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
@@ -50,28 +49,16 @@ jobs:
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
 
       - name: Install system dependencies
-        if: runner.os == 'Linux'
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           echo $sysreqs
-          # sudo -s eval "$sysreqs"
+          sudo -s eval "$sysreqs"
 
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
-
-      - name: Check
-        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@master
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
