@@ -16,7 +16,7 @@ jobs:
         config:
           - {os: ubuntu-18.04, r: '3.6'}
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -24,8 +24,6 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
-
-      - uses: r-lib/actions/setup-pandoc@master
 
       - name: Query dependencies
         run: |
