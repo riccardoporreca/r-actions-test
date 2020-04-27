@@ -30,8 +30,6 @@ jobs:
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), "depends.Rds", version = 2)
         shell: Rscript {0}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cache R packages
         uses: actions/cache@v1
@@ -43,6 +41,7 @@ jobs:
       - name: Install system dependencies
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
