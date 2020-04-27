@@ -11,24 +11,7 @@ Authors@R:
              role = c("cph", "fnd")))
 Description: What the package does (one paragraph).
 Imports: 
-    pkgbuild,
-    rJava,
-    config,
-    golem,
-    shiny,
-    bsplus,
-    dplyr,
-    tidyr,
-    ggplot2,
-    plotly,
-    DT,
-    RColorBrewer,
-    grid,
-    leaflet,
-    rgdal,
-    shinycssloaders,
-    sp,
-    markdown
+    git2r
 URL: https://github.com/jimhester/r-actions-test
 License: MIT + file LICENSE
 Encoding: UTF-8
