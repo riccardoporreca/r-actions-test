@@ -39,8 +39,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install -y libgit2-dev
           sudo apt-get install -y libcurl4-openssl-dev
-          # make git-core libxml2-dev libgit2-dev
-          # libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc libcurl4-openssl-dev
+          sudo apt-get install -y make git-core libxml2-dev libgit2-dev libssl-dev zlib1g-dev libssh2-1-dev pandoc pandoc-citeproc libcurl4-openssl-dev
         env: 
           DEBIAN_FRONTEND: noninteractive
 
