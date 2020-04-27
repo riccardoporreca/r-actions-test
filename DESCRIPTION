@@ -11,7 +11,7 @@ Authors@R:
              role = c("cph", "fnd")))
 Description: What the package does (one paragraph).
 Imports: 
-    shiny
+    golem
 URL: https://github.com/jimhester/r-actions-test
 License: MIT + file LICENSE
 Encoding: UTF-8
