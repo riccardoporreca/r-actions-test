@@ -13,12 +13,8 @@ Description: What the package does (one paragraph).
 Imports: 
     config,
     golem,
-    shiny,
-    bsplus,
-    dplyr,
-    tidyr,
-    ggplot2,
-    plotly
+    shiny
+    
 URL: https://github.com/jimhester/r-actions-test
 License: MIT + file LICENSE
 Encoding: UTF-8
