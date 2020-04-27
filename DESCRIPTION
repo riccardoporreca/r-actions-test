@@ -14,7 +14,6 @@ Imports:
     config,
     golem,
     shiny
-    
 URL: https://github.com/jimhester/r-actions-test
 License: MIT + file LICENSE
 Encoding: UTF-8
